@@ -24,6 +24,16 @@ button{font:inherit;cursor:pointer}
 .ad{display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.85rem;background:repeating-linear-gradient(45deg,#f3ebe9,#f3ebe9 10px,#f9f3f1 10px,#f9f3f1 20px);border:1px dashed #d8c7c3;border-radius:6px}
 .ad-top{height:90px;max-width:650px;margin:.4rem auto}
 
+/* Top banner ad (sample) */
+.banner{position:relative;display:flex;align-items:center;gap:1rem;max-width:728px;min-height:90px;margin:.4rem auto;padding:.6rem 1.3rem;border-radius:8px;overflow:hidden;color:#fff;background:radial-gradient(circle at 92% 15%,rgba(255,255,255,.28),transparent 38%),radial-gradient(circle at 70% 120%,rgba(56,189,248,.6),transparent 45%),linear-gradient(110deg,#082f49,#0369a1 60%,#38bdf8)}
+.adtag{position:absolute;top:0;inset-inline-end:.8rem;background:rgba(255,255,255,.92);color:#555;font-size:.7rem;line-height:1.5;padding:0 .6rem;border-radius:0 0 6px 6px}
+.b-ico{font-size:2.2rem;line-height:1}
+.b-txt{flex:1;display:flex;flex-direction:column;line-height:1.5}
+.b-txt b{font-size:1.45rem}
+.b-txt small{font-size:.92rem;opacity:.92}
+.b-cta{background:#fff;color:var(--accent);border-radius:999px;padding:.2rem 1.3rem;white-space:nowrap;font-family:"Aammufk","MVWaheed",sans-serif}
+.banner:hover .b-cta{background:var(--navy);color:#fff}
+
 /* Header */
 .top{background:var(--tint);padding:.8rem 0}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
@@ -137,6 +147,7 @@ footer li a:hover{text-decoration:underline}
   .search input{width:60px}
 }
 @media(max-width:520px){
+  .b-ico{display:none}.b-txt b{font-size:1.15rem}.b-txt small{font-size:.8rem}.b-cta{padding:.1rem .9rem;font-size:.9rem}
   .top .wrap{flex-wrap:wrap;justify-content:center}
   .top .logo{order:-1;flex-basis:100%;text-align:center}
   .meta,.tools{justify-content:center}
@@ -149,7 +160,7 @@ footer li a:hover{text-decoration:underline}
 </head>
 <body>
 
-<div class="wrap"><div class="ad ad-top" data-i="ad">އިޢުލާން</div></div>
+<div class="wrap"><a class="banner" href="#"><span class="adtag" data-i="ad">އިޢުލާން</span><span class="b-ico" aria-hidden="true">📢</span><span class="b-txt"><b class="ttl" data-i="adt"></b><small data-i="ads"></small></span><span class="b-cta" data-i="adc"></span></a></div>
 
 <header class="top">
   <div class="wrap">
@@ -210,8 +221,8 @@ footer li a:hover{text-decoration:underline}
 <script>
 var lang = "dv";
 var UI = {
- dv:{ad:"އިޢުލާން",menu:"މެނޫ",back:"ފަހަތަށް",related:"ގުޅޭ ޚަބަރުތައް",prev:"ކުރީ ޚަބަރު",next:"ދެން އޮތް ޚަބަރު",latest1:"އެންމެ",latest2:"ފަހުގެ ޚަބަރު",more:"އިތުރު ޚަބަރު",more_sec:"އިތުރު ޚަބަރުތައް",tag:"ޚަބަރު ދިވެހި ބަހުން، އަވަހަށް އަދި ސައްހަ ގޮތުގައި.",sections:"ބައިތައް",archive:"އާކައިވް",contact:"ގުޅުއްވާ",search:"ހޯދާ",toggle:"English",ago:function(n){return n+" ގަޑިއިރު ކުރިން"},copy:"© 2026 ހުރިހާ ޙައްޤުތަކެއް ރައްކާތެރިކުރެވިގެންވެއެވެ."},
- en:{ad:"Advertisement",menu:"Menu",back:"Back to news",related:"Related stories",prev:"Previous story",next:"Next story",latest1:"Latest",latest2:"News",more:"More news",more_sec:"More stories",tag:"News in Dhivehi, fast and accurate.",sections:"Sections",archive:"Archive",contact:"Contact",search:"Search",toggle:"ދިވެހި",ago:function(n){return n+"h ago"},copy:"© 2026 All rights reserved."}
+ dv:{ad:"އިޢުލާން",menu:"މެނޫ",adt:"ތިޔަ އިޢުލާނު މިތަނުގައި",ads:"ކޮންމެ ދުވަހަކު ހާސް ގުރިން ކިޔުންތެރިންނަށް ވާސިލްވުން",adc:"ގުޅުއްވާ",back:"ފަހަތަށް",related:"ގުޅޭ ޚަބަރުތައް",prev:"ކުރީ ޚަބަރު",next:"ދެން އޮތް ޚަބަރު",latest1:"އެންމެ",latest2:"ފަހުގެ ޚަބަރު",more:"އިތުރު ޚަބަރު",more_sec:"އިތުރު ޚަބަރުތައް",tag:"ޚަބަރު ދިވެހި ބަހުން، އަވަހަށް އަދި ސައްހަ ގޮތުގައި.",sections:"ބައިތައް",archive:"އާކައިވް",contact:"ގުޅުއްވާ",search:"ހޯދާ",toggle:"English",ago:function(n){return n+" ގަޑިއިރު ކުރިން"},copy:"© 2026 ހުރިހާ ޙައްޤުތަކެއް ރައްކާތެރިކުރެވިގެންވެއެވެ."},
+ en:{ad:"Advertisement",menu:"Menu",adt:"Your Ad Here",ads:"Reach thousands of readers every day",adc:"Contact us",back:"Back to news",related:"Related stories",prev:"Previous story",next:"Next story",latest1:"Latest",latest2:"News",more:"More news",more_sec:"More stories",tag:"News in Dhivehi, fast and accurate.",sections:"Sections",archive:"Archive",contact:"Contact",search:"Search",toggle:"ދިވެހި",ago:function(n){return n+"h ago"},copy:"© 2026 All rights reserved."}
 };
 var CATS = {
  home:{dv:"ފުރަތަމަ ޞަފްޙާ",en:"Home"},
