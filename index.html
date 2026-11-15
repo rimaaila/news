@@ -55,7 +55,8 @@ nav ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.4
 .burger{display:none;align-items:center;justify-content:space-between;width:100%;background:none;border:0;color:var(--navy);padding:.5rem .3rem;font-family:"Aammufk","MVWaheed",sans-serif;font-size:1.1rem}
 .burger i{font-style:normal;font-size:1.5rem;line-height:1}
 nav a{display:block;color:var(--navy);padding:.25rem 1.1rem;white-space:nowrap;font-size:1.05rem;font-family:"Aammufk","MVWaheed",sans-serif;border-radius:6px}
-nav a:hover{background:rgba(8,47,73,.12)}
+nav a:hover,nav a.on{background:rgba(8,47,73,.16)}
+.sec-title.cat-h{margin-top:.3rem}
 
 /* Hero */
 .hero{background:linear-gradient(180deg,#e0f2fe,#bae6fd);color:var(--navy);padding:2.5rem 0 3rem;text-align:center}
@@ -149,7 +150,8 @@ footer li a:hover{text-decoration:underline}
 @media(max-width:520px){
   .b-ico{display:none}.b-txt b{font-size:1.15rem}.b-txt small{font-size:.8rem}.b-cta{padding:.1rem .9rem;font-size:.9rem}
   .top .wrap{flex-wrap:wrap;justify-content:center}
-  .top .logo{order:-1;flex-basis:100%;text-align:center}
+  .top .logo{order:-1;flex-basis:100%;display:block}
+  .top .logo img{margin-inline:auto}
   .meta,.tools{justify-content:center}
   .arrow{display:none}
   .feature .img{height:230px}.feature h2{font-size:1.5rem}
@@ -250,7 +252,13 @@ var A = [
  {c:"sports",t:22,h:{dv:"ޒުވާނުންގެ ކުޅިވަރު މުބާރާތް ހޮނިހިރުގައި ފެށިއްޖެ",en:"Youth sports tournament kicks off"}},
  {c:"world",t:26,h:{dv:"ދުނިޔޭގެ މޫސުމީ ބަދަލާ ބެހޭ އާ ސިއްރު ބައްދަލުވުމެއް",en:"New global summit on climate change"}},
  {c:"health",t:30,h:{dv:"ދުޅަހެޔޮކަމަށް ބޭނުންތެރި އާ އިރުޝާދުތަކެއް ނެރެއްކޮށްފި",en:"New health guidelines published"}},
- {c:"politics",t:34,h:{dv:"މަޖިލީހުގެ އަލަށް ފެށޭ ސެޝަނުގެ ޕްރޮގްރާމް ކަނޑައެޅިއްޖެ",en:"Parliament sets agenda for the new session"}}
+ {c:"politics",t:34,h:{dv:"މަޖިލީހުގެ އަލަށް ފެށޭ ސެޝަނުގެ ޕްރޮގްރާމް ކަނޑައެޅިއްޖެ",en:"Parliament sets agenda for the new session"}},
+ {c:"local",t:38,h:{dv:"މާލެ ސިޓީގައި އާ މަގުތަކެއް ހެދުމުގެ މަސައްކަތް ފެށިއްޖެ",en:"Work begins on new roads in Malé city"}},
+ {c:"politics",t:42,h:{dv:"ރައްޔިތުންނަށް ދެވޭ ޚިދުމަތްތަކާ ބެހޭ އާ ސިޔާސަތެއް ހާމަކުރެވިއްޖެ",en:"New policy on public services unveiled"}},
+ {c:"economy",t:46,h:{dv:"ރާއްޖޭގެ މަސްވެރިކަމުގެ ބާޒާރު ފުޅާވަމުންދަނީ",en:"Maldives fisheries market continues to expand"}},
+ {c:"sports",t:50,h:{dv:"ސްކޫލް ކުޅިވަރު ފެއަރގައި ކުޑަކުދިން ބައިވެރިވެއްޖެ",en:"Children join school sports fair"}},
+ {c:"world",t:54,h:{dv:"ދުނިޔޭގެ ޓެކްނޮލޮޖީ ދާއިރާގައި އާ އުފެއްދުމެއް ފާހަގަކުރެވިއްޖެ",en:"New innovation marks the global tech sector"}},
+ {c:"health",t:58,h:{dv:"ކުދިންނަށް ވެކްސިން ދިނުމުގެ އާ ކެމްޕޭނެއް ފެށިއްޖެ",en:"New vaccination campaign for children begins"}}
 ];
 var $ = function(id){return document.getElementById(id)};
 function img(k,x){return '<div class="img g'+(k%6)+' p'+(k%6)+(x?' '+x:'')+'"></div>'}
@@ -268,13 +276,14 @@ function render(){
   var d = new Date();
   $("date").textContent = d.getDate()+" "+MONTHS[lang][d.getMonth()]+" "+d.getFullYear();
   var keys = Object.keys(CATS);
-  $("nav").innerHTML = keys.map(function(k){return '<li><a href="#">'+CATS[k][lang]+'</a></li>'}).join("");
-  $("flinks").innerHTML = keys.map(function(k){return '<li><a href="#">'+CATS[k][lang]+'</a></li>'}).join("");
+  var lk=function(k){return '<li><a data-k="'+k+'" href="'+(k==="home"?'#':'#c/'+k)+'">'+CATS[k][lang]+'</a></li>'};
+  $("nav").innerHTML = keys.map(lk).join("");
+  $("flinks").innerHTML = keys.map(lk).join("");
   $("hero").innerHTML = A.slice(0,4).map(function(a,i){return card(a,i)}).join("");
   $("colA").innerHTML = item(A[4],4)+item(A[5],5)+'<div class="ad ad-box">'+UI[lang].ad+'</div>';
   $("colB").innerHTML = '<a href="#a/6">'+img(6)+'<div class="date" style="margin-top:.6rem">'+ago(A[6])+'</div><h2>'+A[6].h[lang]+'</h2></a>';
   $("colC").innerHTML = item(A[7],7,true)+item(A[8],8,true);
-  $("more").innerHTML = A.slice(9).map(function(a,i){return item(a,i+9,true)}).join("");
+  $("more").innerHTML = A.slice(9,12).map(function(a,i){return item(a,i+9,true)}).join("");
   show();
 }
 /* Sample article text. To write a real article, add  body:{dv:[...],en:[...]}  to its entry in A. */
@@ -286,37 +295,52 @@ var SAMPLE = {
  "Add the details here: who, what, where and when, along with quotes and background that help readers understand the story.",
  "This story will be updated as more information becomes available."]
 };
-var lastY = 0, inArt = false;
-function current(){var m=/^#a\/(\d+)$/.exec(location.hash);return m&&A[+m[1]]?+m[1]:-1}
+var lastY = 0, inSub = false;
+function parse(){
+  var h=location.hash, m=/^#a\/(\d+)$/.exec(h);
+  if(m && A[+m[1]]) return {t:"a",k:+m[1]};
+  m=/^#c\/(\w+)$/.exec(h);
+  if(m && m[1]!=="home" && CATS[m[1]]) return {t:"c",k:m[1]};
+  return {t:"h"};
+}
 function articleHtml(k){
   var a=A[k], n=A.length, u=UI[lang], paras=(a.body||SAMPLE)[lang];
   var d=new Date(Date.now()-a.t*3600000);
   var rel=[1,2,3].map(function(j){var x=(k+j)%n;return item(A[x],x,true)}).join("");
-  return '<article class="art"><a class="back" href="#">'+u.back+'</a><br><span class="tag">'+CATS[a.c][lang]+'</span><h1>'+a.h[lang]+'</h1>'
+  return '<article class="art"><a class="back" href="#">'+u.back+'</a><br><a class="tag" href="#c/'+a.c+'">'+CATS[a.c][lang]+'</a><h1>'+a.h[lang]+'</h1>'
    +'<div class="meta2">'+d.getDate()+' '+MONTHS[lang][d.getMonth()]+' '+d.getFullYear()+' · '+ago(a)+'</div>'
    +img(k,'artimg')+'<div class="prose">'+paras.map(function(t){return '<p>'+t+'</p>'}).join("")+'</div>'
    +'<div class="pn"><a href="#a/'+((k-1+n)%n)+'">'+u.prev+'</a><a href="#a/'+((k+1)%n)+'">'+u.next+'</a></div></article>'
    +'<h2 class="sec-title">'+u.related+'</h2><div class="grid rel">'+rel+'</div>';
 }
+function catHtml(key){
+  var list=A.map(function(a,i){return a.c===key?item(a,i,true):""}).join("");
+  return '<a class="back" href="#">'+UI[lang].back+'</a><h2 class="sec-title cat-h">'+CATS[key][lang]+'</h2><div class="grid rel">'+list+'</div>';
+}
 function show(){
-  var k=current();
-  $("home").hidden = k>=0; $("page").hidden = k<0;
-  if(k>=0){ $("page").innerHTML = articleHtml(k); document.title = A[k].h[lang]; }
+  var r=parse();
+  $("home").hidden = r.t!=="h"; $("page").hidden = r.t==="h";
+  if(r.t==="a"){ $("page").innerHTML=articleHtml(r.k); document.title=A[r.k].h[lang]; }
+  if(r.t==="c"){ $("page").innerHTML=catHtml(r.k); document.title=CATS[r.k][lang]; }
+  document.querySelectorAll("#nav a").forEach(function(l){l.classList.toggle("on", r.t==="c" && l.dataset.k===r.k)});
 }
 function route(){
-  var k=current();
-  if(k>=0 && !inArt) lastY = window.pageYOffset;
+  var r=parse();
+  if(r.t!=="h" && !inSub) lastY = window.pageYOffset;
   show();
-  if(k>=0) window.scrollTo(0,0);
+  if(r.t!=="h") window.scrollTo(0,0);
   else if(location.hash==="#all") $("all").scrollIntoView();
-  else if(inArt) window.scrollTo(0,lastY);
-  inArt = k>=0;
+  else if(inSub) window.scrollTo(0,lastY);
+  inSub = r.t!=="h";
 }
 window.addEventListener("hashchange",route);
 function closeMenu(){$("nav").classList.remove("open");$("burger").setAttribute("aria-expanded","false")}
 $("burger").onclick = function(){var o=$("nav").classList.toggle("open");this.setAttribute("aria-expanded",o)};
-$("nav").onclick = function(e){if(e.target.closest("a"))closeMenu()};
+$("nav").onclick = function(e){var l=e.target.closest("a");if(l){if(l.getAttribute("href")==="#")lastY=0;closeMenu()}};
+document.querySelector(".logo").onclick = function(){lastY=0};
 window.addEventListener("resize",function(){if(innerWidth>860)closeMenu()});
+document.addEventListener("click",function(e){if(!e.target.closest("nav"))closeMenu()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenu()});
 $("lang").onclick = function(){lang = lang==="dv" ? "en" : "dv"; closeMenu(); render()};
 function slide(dir){
   var c = $("hero"), rtl = document.dir==="rtl" || document.documentElement.dir==="rtl";
